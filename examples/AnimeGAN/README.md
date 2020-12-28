@@ -2,6 +2,9 @@
 ## 在线体验
 * AIStudio项目：[PaddleInference：风景图像动漫化模型AnimeGAN的推理部署](https://aistudio.baidu.com/aistudio/projectdetail/1201335)
 
+## 预训练推理模型下载
+* 下载链接：[Paddle Quick Inference Examples](https://aistudio.baidu.com/aistudio/datasetdetail/66517)
+
 ## 代码示例
 ```python
 # main.py
