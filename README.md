@@ -38,11 +38,13 @@ combined：推理模型参数是否为合并格式
 
 还可以通过InferenceModel.config来对其他选项进行配置
 如配置tensorrt：
-model.config.enable_tensorrt_engine(workspace_size = 1 << 20, 
+model.config.enable_tensorrt_engine(
+    workspace_size = 1 << 20, 
     max_batch_size = 1, 
     min_subgraph_size = 3, 
-    precision_mode=paddle_infer.PrecisionType.Float32, 
-    use_static = False, use_calib_mode = False
+    precision_mode=paddle.inference.PrecisionType.Float32, 
+    use_static = False, 
+    use_calib_mode = False
 )
 '''
 model = InferenceModel(
