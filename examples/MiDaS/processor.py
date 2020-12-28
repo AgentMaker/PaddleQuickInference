@@ -5,6 +5,8 @@ from utils import write_depth
 from paddle.vision.transforms import Compose
 from transforms import Resize, NormalizeImage, PrepareForNet
 
+__all__ = ['preprocess', 'postprocess']
+
 # 数据预处理函数
 def preprocess(img_path, size):
     # 图像变换
