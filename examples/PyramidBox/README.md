@@ -1,4 +1,4 @@
-# **MiDaS的推理部署**
+# **PyramidBox的推理部署**
 ## 预训练推理模型下载
 * 下载链接：[Paddle Quick Inference Examples](https://aistudio.baidu.com/aistudio/datasetdetail/66517)
 
