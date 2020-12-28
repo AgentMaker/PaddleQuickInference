@@ -2,6 +2,8 @@ import os
 import cv2
 import numpy as np
 
+__all__ = ['preprocess', 'postprocess']
+
 def preprocess(img_path):
     # 读取图片
     img = cv2.imread(img_path)
