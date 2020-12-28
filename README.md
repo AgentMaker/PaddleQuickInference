@@ -26,9 +26,6 @@ inputs = np.random.randn(8, 64, 64, 3).astype(np.float32)
 
 # 前向计算
 outputs = model(inputs)
-
-# 打印输出
-print(outputs.shape)
 ```
 
 ## API说明
