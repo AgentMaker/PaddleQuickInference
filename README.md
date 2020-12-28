@@ -80,3 +80,7 @@ batch_size：推理数据批大小
 '''
 outputs = model(input_datas, batch_size=4)
 ```
+
+## 部署案例
+* [AnimeGAN](./examples/AnimeGAN)
+* [UGATIT](./examples/UGATIT)
