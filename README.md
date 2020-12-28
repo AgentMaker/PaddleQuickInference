@@ -82,6 +82,6 @@ outputs = model(input_datas, batch_size=4)
 ```
 
 ## 部署案例
-* [街景动漫化AnimeGAN](./examples/AnimeGAN)
-* [人像动漫化UGATIT](./examples/UGATIT)
-* [单目深度估计MiDaS](./examples/MiDaS)
+* [街景动漫化模型 AnimeGAN](./examples/AnimeGAN)
+* [人像动漫化模型 UGATIT](./examples/UGATIT)
+* [单目深度估计模型 MiDaS](./examples/MiDaS)
