@@ -30,3 +30,54 @@ outputs = model(inputs)
 # 打印输出
 print(outputs.shape)
 ```
+
+## API说明
+```python
+'''
+modelpath：推理模型路径
+use_gpu：是否使用GPU进行推理
+use_mkldnn：是否使用MKLDNN库进行CPU推理加速
+combined：推理模型参数是否为合并格式
+
+还可以通过InferenceModel.config来对其他选项进行配置
+如配置tensorrt：
+model.config.enable_tensorrt_engine(workspace_size = 1 << 20, 
+    max_batch_size = 1, 
+    min_subgraph_size = 3, 
+    precision_mode=paddle_infer.PrecisionType.Float32, 
+    use_static = False, use_calib_mode = False
+)
+'''
+model = InferenceModel(
+    modelpath='inference_model', 
+    use_gpu=False,
+    use_mkldnn=False,
+    combined=False
+)
+
+'''
+将模型设置为推理模式
+实际上是使用Config创建Predictor
+'''
+model.eval()
+
+'''
+创建完Predictor后
+可打印出模型的输入输出节点的数量和名称
+'''
+print(model)
+
+'''
+根据输入节点的数量和名称准备好数据
+数据格式为Ndarray
+'''
+input_datas = np.random.randn(8, 64, 64, 3).astype(np.float32)
+
+'''
+模型前向计算
+根据输入节点顺序传入输入数据
+batch_size：推理数据批大小
+返回结果格式为所有输出节点的输出（Ndarray）
+'''
+outputs = model(input_datas, batch_size=4)
+```
