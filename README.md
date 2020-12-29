@@ -48,7 +48,7 @@ model.config.enable_tensorrt_engine(
 )
 '''
 model = InferenceModel(
-    modelpath='inference_model', 
+    modelpath=[Inference Model Path], 
     use_gpu=False,
     use_mkldnn=False,
     combined=False
