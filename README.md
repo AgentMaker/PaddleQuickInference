@@ -26,7 +26,7 @@ $ pip install [path to whl]
 ## 快速使用
 ```python
 import numpy as np
-from inference import InferenceModel
+from pqi import InferenceModel
 
 # 加载推理模型
 model = InferenceModel(
