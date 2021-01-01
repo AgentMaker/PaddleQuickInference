@@ -12,8 +12,8 @@
 
     | 模型计算图 | 模型参数 |
     | -------- | -------- |
-    | \_\_model\_\_ | \_\_params\_\_ |
     | model | params |
+    | \_\_model\_\_ | \_\_params\_\_ |
     | \_\_model\_\_ | \* |
     | \*.pdmodel | \*.pdiparams |
 
