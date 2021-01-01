@@ -7,6 +7,16 @@
 * 将常用的Config和Predictor配置进行封装
 * 留出额外的接口以兼容一些特殊的配置操作
 
+## 模型格式
+* 目前本项目支持四种推理模型格式，具体请参考下表：
+
+    | 模型计算图 | 模型参数 |
+    | -------- | -------- |
+    | \_\_model\_\_ | \_\_params\_\_ |
+    | model | params |
+    | \_\_model\_\_ | \* |
+    | \*.pdmodel | \*.pdiparams |
+
 ## 快速使用
 ```python
 import numpy as np
