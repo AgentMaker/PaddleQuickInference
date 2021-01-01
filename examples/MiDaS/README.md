@@ -1,6 +1,7 @@
 # **MiDaS的推理部署**
-## 在线体验
-* AIStudio项目：[PaddleHub：一键实现图像深度估计](https://aistudio.baidu.com/aistudio/projectdetail/1407981)
+## 效果展示
+![输入图像](./test.jpg)
+![输出图像](./save_img/MiDaS_Small.png)
 
 ## 预训练推理模型下载
 * 下载链接：[Paddle Quick Inference Examples](https://aistudio.baidu.com/aistudio/datasetdetail/66517)

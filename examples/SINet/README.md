@@ -1,4 +1,9 @@
 # **SINet的推理部署**
+## 效果展示
+![输入图像](./test.jpg)
+![输出图像](./save_img/result_SINet_Portrait_Segmentation.png)
+![输出图像](./save_img/result_mask_SINet_Portrait_Segmentation.png)
+
 ## 预训练推理模型下载
 * 下载链接：[Paddle Quick Inference Examples](https://aistudio.baidu.com/aistudio/datasetdetail/66517)
 

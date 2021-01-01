@@ -1,4 +1,8 @@
 # **U2Net Portrait的推理部署**
+## 效果展示
+![输入图像](./test.jpg)
+![输出图像](./save_img/u2net_portrait.jpg)
+
 ## 预训练推理模型下载
 * 下载链接：[Paddle Quick Inference Examples](https://aistudio.baidu.com/aistudio/datasetdetail/66517)
 

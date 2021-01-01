@@ -1,6 +1,7 @@
 # **AnimeGAN的推理部署**
-## 在线体验
-* AIStudio项目：[PaddleInference：风景图像动漫化模型AnimeGAN的推理部署](https://aistudio.baidu.com/aistudio/projectdetail/1201335)
+## 效果展示
+![输入图像](./test.jpg)
+![输出图像](./save_img/animegan_v1_hayao_60.jpg)
 
 ## 预训练推理模型下载
 * 下载链接：[Paddle Quick Inference Examples](https://aistudio.baidu.com/aistudio/datasetdetail/66517)
