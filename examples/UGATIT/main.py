@@ -1,4 +1,4 @@
-from pqi import InferenceModel
+from ppqi import InferenceModel
 from processor import preprocess, postprocess
 
 # 参数配置
