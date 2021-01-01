@@ -16,8 +16,7 @@ from inference import InferenceModel
 model = InferenceModel(
     modelpath=[Inference Model Path], 
     use_gpu=False,
-    use_mkldnn=False,
-    combined=False
+    use_mkldnn=False
 )
 model.eval()
 
@@ -34,7 +33,6 @@ outputs = model(inputs)
 modelpath：推理模型路径
 use_gpu：是否使用GPU进行推理
 use_mkldnn：是否使用MKLDNN库进行CPU推理加速
-combined：推理模型参数是否为合并格式
 
 还可以通过InferenceModel.config来对其他选项进行配置
 如配置tensorrt：
@@ -50,8 +48,7 @@ model.config.enable_tensorrt_engine(
 model = InferenceModel(
     modelpath=[Inference Model Path], 
     use_gpu=False,
-    use_mkldnn=False,
-    combined=False
+    use_mkldnn=False
 )
 
 '''
