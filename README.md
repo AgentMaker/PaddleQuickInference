@@ -17,6 +17,12 @@
     | \_\_model\_\_ | \_\_params\_\_ |
     | \*.pdmodel | \*.pdiparams |
 
+# 安装
+* 通过wheel包进行安装：[下载链接](https://github.com/jm12138/PaddleQuickInference/releases)
+```shell
+$ pip install [path to whl]
+```
+
 ## 快速使用
 ```python
 import numpy as np
