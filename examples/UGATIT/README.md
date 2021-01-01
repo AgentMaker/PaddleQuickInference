@@ -27,8 +27,7 @@ input_data = preprocess(configs['img_path'])
 model = InferenceModel(
     modelpath=configs['model_name'], 
     use_gpu=configs['use_gpu'], 
-    use_mkldnn=configs['use_mkldnn'], 
-    combined=False
+    use_mkldnn=configs['use_mkldnn']
 )
 model.eval()
 

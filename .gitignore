@@ -127,3 +127,13 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# pretrained models
+examples/AnimeGAN/animegan_v1_hayao_60/
+examples/ExtremeC3Net/ExtremeC3_Portrait_Segmentation/
+examples/MiDaS/MiDaS_Small/
+examples/OpenPose/HandsEstimation/openpose_hands_estimation/
+examples/PyramidBox/pyramidbox_lite_mobile/
+examples/SINet/SINet_Portrait_Segmentation/
+examples/U2Net/PortraitGeneration/u2net_portrait.*
+examples/UGATIT/UGATIT_100w/

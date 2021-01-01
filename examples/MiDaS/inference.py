@@ -7,7 +7,7 @@ __all__ = ['InferenceModel']
 
 class InferenceModel():
     # 初始化函数
-    def __init__(self, modelpath, use_gpu=False, use_mkldnn=False, combined=True):
+    def __init__(self, modelpath, use_gpu=False, use_mkldnn=False):
         '''
         init the inference model
 
@@ -16,11 +16,9 @@ class InferenceModel():
         use_gpu: use gpu or not
 
         use_mkldnn: use mkldnn or not
-
-        combined: inference model format is combined or not
         '''
         # 加载模型配置
-        self.config = self.load_config(modelpath, use_gpu, use_mkldnn, combined)
+        self.config = self.load_config(modelpath, use_gpu, use_mkldnn)
 
     # 打印函数
     def __repr__(self):
@@ -42,7 +40,7 @@ class InferenceModel():
         return self.forward(*input_datas, batch_size=batch_size)
 
     # 模型参数加载函数
-    def load_config(self, modelpath, use_gpu, use_mkldnn, combined):
+    def load_config(self, modelpath, use_gpu, use_mkldnn):
         '''
         load the model config
 
@@ -51,8 +49,6 @@ class InferenceModel():
         use_gpu: use gpu or not
 
         use_mkldnn: use mkldnn or not
-
-        combined: inference model format is combined or not
         '''
         # 对运行位置进行配置
         if use_gpu:
@@ -61,14 +57,26 @@ class InferenceModel():
             except Exception:
                 print('Error! Unable to use GPU. Please set the environment variables "CUDA_VISIBLE_DEVICES=GPU_id" to use GPU.')
                 use_gpu = False
-                
-        # 加载模型参数
-        if combined:
-            model = os.path.join(modelpath, "__model__")
-            params = os.path.join(modelpath, "__params__")
+
+        if os.path.isdir(modelpath):
+            if os.path.exists(os.path.join(modelpath, "__params__")):
+                # __model__ + __params__
+                model = os.path.join(modelpath, "__model__")
+                params = os.path.join(modelpath, "__params__")
+                config = Config(model, params)
+            elif os.path.exists(os.path.join(modelpath, "params")):
+                # model + params
+                model = os.path.join(modelpath, "model")
+                params = os.path.join(modelpath, "params")
+                config = Config(model, params)
+            elif os.path.exists(os.path.join(modelpath, "__model__")):
+                # __model__ + others
+                config = Config(modelpath)
+        elif os.path.exists(modelpath+".pdmodel"):
+            # *.pdmodel + *.pdiparams
+            model = modelpath+".pdmodel"
+            params = modelpath+".pdiparams"
             config = Config(model, params)
-        else:
-            config = Config(modelpath)
 
         # 设置参数
         if use_gpu:   

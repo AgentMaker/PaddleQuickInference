@@ -27,8 +27,7 @@ input_data = preprocess(
 model = InferenceModel(
     modelpath=configs['model_name'], 
     use_gpu=configs['use_gpu'], 
-    use_mkldnn=configs['use_mkldnn'], 
-    combined=True
+    use_mkldnn=configs['use_mkldnn']
 )
 model.eval()
 
