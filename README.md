@@ -20,7 +20,7 @@
 # 安装
 * 直接安装
 ```shell
-$ pip install ppqi
+$ pip install ppqi -i https://pypi.python.org/simple
 ```
 * 通过wheel包进行安装：[下载链接](https://github.com/jm12138/PaddleQuickInference/releases)
 ```shell
