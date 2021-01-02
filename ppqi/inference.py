@@ -5,6 +5,7 @@ from paddle.inference import create_predictor, Config
 
 __all__ = ['InferenceModel']
 
+
 class InferenceModel():
     # 初始化函数
     def __init__(self, modelpath, use_gpu=False, use_mkldnn=False):
@@ -25,10 +26,10 @@ class InferenceModel():
         '''
         get the numbers and name of inputs and outputs 
         '''
-        return 'inputs_num: %d\ninputs_names: %s\noutputs_num: %d\noutputs_names: %s' % (
-            len(self.input_handles), 
-            str(self.input_names), 
-            len(self.output_handles), 
+        return 'input_num: %d\ninput_names: %s\noutput_num: %d\noutput_names: %s' % (
+            self.input_num,
+            str(self.input_names),
+            self.output_num,
             str(self.output_names)
         )
 
@@ -55,7 +56,8 @@ class InferenceModel():
             try:
                 int(os.environ.get('CUDA_VISIBLE_DEVICES'))
             except Exception:
-                print('Error! Unable to use GPU. Please set the environment variables "CUDA_VISIBLE_DEVICES=GPU_id" to use GPU.')
+                print(
+                    'Error! Unable to use GPU. Please set the environment variables "CUDA_VISIBLE_DEVICES=GPU_id" to use GPU.')
                 use_gpu = False
 
         if os.path.isdir(modelpath):
@@ -79,7 +81,7 @@ class InferenceModel():
             config = Config(model, params)
 
         # 设置参数
-        if use_gpu:   
+        if use_gpu:
             config.enable_use_gpu(100, 0)
         else:
             config.disable_gpu()
@@ -101,15 +103,21 @@ class InferenceModel():
         self.input_names = self.predictor.get_input_names()
         self.output_names = self.predictor.get_output_names()
 
+        # 获取模型的输入输出节点数量
+        self.input_num = len(self.input_names)
+        self.output_num = len(self.output_names)
+
         # 获取输入
         self.input_handles = []
         for input_name in self.input_names:
-            self.input_handles.append(self.predictor.get_input_handle(input_name))
+            self.input_handles.append(
+                self.predictor.get_input_handle(input_name))
 
         # 获取输出
         self.output_handles = []
         for output_name in self.output_names:
-            self.output_handles.append(self.predictor.get_output_handle(output_name))
+            self.output_handles.append(
+                self.predictor.get_output_handle(output_name))
 
     # 前向计算函数
     def forward(self, *input_datas, batch_size=1):
@@ -122,25 +130,27 @@ class InferenceModel():
         """
         # 切分输入数据
         datas_num = input_datas[0].shape[0]
-        split_num = datas_num // batch_size + 1 if datas_num % batch_size != 0 else datas_num // batch_size
-        input_datas = [np.array_split(input_data, split_num) for input_data in input_datas]
+        split_num = datas_num // batch_size + \
+            1 if datas_num % batch_size != 0 else datas_num // batch_size
+        input_datas = [np.array_split(input_data, split_num)
+                       for input_data in input_datas]
 
         # 遍历输入数据进行预测
         outputs = {}
         for step in range(split_num):
-            for i in range(len(self.input_handles)):
+            for i in range(self.input_num):
                 input_data = input_datas[i][step].copy()
                 self.input_handles[i].copy_from_cpu(input_data)
 
             self.predictor.run()
-            
-            for i in range(len(self.output_handles)):
+
+            for i in range(self.output_num):
                 output = self.output_handles[i].copy_to_cpu()
                 if i in outputs:
                     outputs[i].append(output)
                 else:
                     outputs[i] = [output]
-        
+
         # 预测结果合并
         for key in outputs.keys():
             outputs[key] = np.concatenate(outputs[key], 0)
@@ -148,4 +158,4 @@ class InferenceModel():
         outputs = [v for v in outputs.values()]
 
         # 返回预测结果
-        return tuple(outputs) if len(outputs)>1 else outputs[0]
+        return tuple(outputs) if len(outputs) > 1 else outputs[0]
