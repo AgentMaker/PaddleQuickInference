@@ -1,5 +1,6 @@
 # Paddle Quick Inference
-* 基于PaddleInference封装的一个快速部署的高层API
+* PaddleInference封装的一个快速部署的高层API
+* 本项目基于Paddle2.0版本开发
 
 ## 高层API特点
 * 使用方便快捷
