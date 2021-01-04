@@ -76,7 +76,7 @@ class InferenceModel():
                 config = Config(modelpath)
             else:
                 raise Exception(
-                    "Error! Can\'t find the model in: %s. Please check your model path." % modelpath)
+                    "Error! Can\'t find the model in: %s. Please check your model path." % os.path.abspath(modelpath))
         elif os.path.exists(modelpath+".pdmodel"):
             # *.pdmodel + *.pdiparams
             model = modelpath+".pdmodel"
@@ -84,7 +84,7 @@ class InferenceModel():
             config = Config(model, params)
         else:
             raise Exception(
-                "Error! Can\'t find the model in: %s. Please check your model path." % modelpath)
+                "Error! Can\'t find the model in: %s. Please check your model path." % os.path.abspath(modelpath))
 
         # 设置参数
         if use_gpu:
