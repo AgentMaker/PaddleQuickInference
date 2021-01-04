@@ -57,7 +57,7 @@ class InferenceModel():
                 int(os.environ.get('CUDA_VISIBLE_DEVICES'))
             except Exception:
                 print(
-                    'Error! Unable to use GPU. Please set the environment variables "CUDA_VISIBLE_DEVICES=GPU_id" to use GPU.')
+                    '''Error! Unable to use GPU. Please set the environment variables "CUDA_VISIBLE_DEVICES=GPU_id" to use GPU. Now switch to CPU to continue...''')
                 use_gpu = False
 
         if os.path.isdir(modelpath):
@@ -74,11 +74,17 @@ class InferenceModel():
             elif os.path.exists(os.path.join(modelpath, "__model__")):
                 # __model__ + others
                 config = Config(modelpath)
+            else:
+                raise Exception(
+                    "Error! Can\'t find the model in: %s. Please check your model path." % modelpath)
         elif os.path.exists(modelpath+".pdmodel"):
             # *.pdmodel + *.pdiparams
             model = modelpath+".pdmodel"
             params = modelpath+".pdiparams"
             config = Config(model, params)
+        else:
+            raise Exception(
+                "Error! Can\'t find the model in: %s. Please check your model path." % modelpath)
 
         # 设置参数
         if use_gpu:
