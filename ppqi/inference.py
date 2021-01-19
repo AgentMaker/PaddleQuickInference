@@ -8,7 +8,7 @@ __all__ = ['InferenceModel']
 
 class InferenceModel():
     # 初始化函数
-    def __init__(self, modelpath, use_gpu=False, use_mkldnn=False):
+    def __init__(self, modelpath, use_gpu=False, gpu_id=0, use_mkldnn=False, cpu_threads=1):
         '''
         init the inference model
 
@@ -19,7 +19,7 @@ class InferenceModel():
         use_mkldnn: use mkldnn or not
         '''
         # 加载模型配置
-        self.config = self.load_config(modelpath, use_gpu, use_mkldnn)
+        self.config = self.load_config(modelpath, use_gpu, gpu_id, use_mkldnn, cpu_threads)
 
     # 打印函数
     def __repr__(self):
@@ -41,7 +41,7 @@ class InferenceModel():
         return self.forward(*input_datas, batch_size=batch_size)
 
     # 模型参数加载函数
-    def load_config(self, modelpath, use_gpu, use_mkldnn):
+    def load_config(self, modelpath, use_gpu, gpu_id, use_mkldnn, cpu_threads):
         '''
         load the model config
 
@@ -88,11 +88,14 @@ class InferenceModel():
 
         # 设置参数
         if use_gpu:
-            config.enable_use_gpu(100, 0)
+            config.enable_use_gpu(100, gpu_id)
         else:
             config.disable_gpu()
+            config.set_cpu_math_library_num_threads(cpu_threads)
             if use_mkldnn:
                 config.enable_mkldnn()
+
+        config.disable_glog_info()
 
         # 返回配置
         return config
