@@ -1,5 +1,5 @@
 # Paddle Quick Inference
-* Paddle Inference 封装的一个快速部署的高层 API
+* [Paddle Inference](https://paddle-inference.readthedocs.io) 封装的一个快速部署的高层 API
 * 本项目基于 Paddle 2.0 版本开发
 
 ## 高层 API 特点
