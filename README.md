@@ -38,7 +38,7 @@ model = InferenceModel([Inference Model Path])
 model.eval()
 
 # 准备数据
-inputs = np.random.randn(8, 64, 64, 3).astype(np.float32)
+inputs = np.random.randn(batch_size, n1, n2, n3, ...).astype(np.float32)
 
 # 前向计算
 outputs = model(inputs)
@@ -88,7 +88,7 @@ print(model)
 根据输入节点的数量和名称准备好数据
 数据格式为 Ndarray
 '''
-input_datas = np.random.randn(8, 64, 64, 3).astype(np.float32)
+inputs = np.random.randn(batch_size, n1, n2, n3, ...).astype(np.float32)
 
 '''
 模型前向计算
