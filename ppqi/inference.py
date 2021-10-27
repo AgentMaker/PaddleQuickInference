@@ -8,7 +8,12 @@ __all__ = ['InferenceModel']
 
 class InferenceModel():
     # 初始化函数
-    def __init__(self, modelpath, use_gpu=False, gpu_id=0, use_mkldnn=False, cpu_threads=1):
+    def __init__(self,
+                 modelpath,
+                 use_gpu=False,
+                 gpu_id=0,
+                 use_mkldnn=False,
+                 cpu_threads=1):
         '''
         init the inference model
 
@@ -77,11 +82,13 @@ class InferenceModel():
             else:
                 raise Exception(
                     "Error! Can\'t find the model in: %s. Please check your model path." % os.path.abspath(modelpath))
-        elif os.path.exists(modelpath+".pdmodel"):
+        elif os.path.exists(modelpath + ".pdmodel"):
             # *.pdmodel + *.pdiparams
-            model = modelpath+".pdmodel"
-            params = modelpath+".pdiparams"
+            model = modelpath + ".pdmodel"
+            params = modelpath + ".pdiparams"
             config = Config(model, params)
+        elif isinstance(modelpath, Config):
+            config = modelpath
         else:
             raise Exception(
                 "Error! Can\'t find the model in: %s. Please check your model path." % os.path.abspath(modelpath))
@@ -140,7 +147,7 @@ class InferenceModel():
         # 切分输入数据
         datas_num = input_datas[0].shape[0]
         split_num = datas_num // batch_size + \
-            1 if datas_num % batch_size != 0 else datas_num // batch_size
+                    1 if datas_num % batch_size != 0 else datas_num // batch_size
         input_datas = [np.array_split(input_data, split_num)
                        for input_data in input_datas]
 
