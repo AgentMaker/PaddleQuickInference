@@ -6,7 +6,7 @@ from paddle.inference import create_predictor, Config
 __all__ = ['InferenceModel']
 
 
-class InferenceModel():
+class InferenceModel:
     # 初始化函数
     def __init__(self,
                  modelpath,
